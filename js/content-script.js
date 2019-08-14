@@ -4,7 +4,7 @@
  * @Author: Aniu
  * @Date: 2019-08-12 15:27:48
  * @LastEditors: Aniu
- * @LastEditTime: 2019-08-13 17:34:41
+ * @LastEditTime: 2019-08-14 09:49:15
  */
 
 const sessionArr = ['isNew', 'isOpen', 'isMerge', 'ProjectName', 'href'];
@@ -87,7 +87,17 @@ $(function() {
 
   //https://dev365.keytop.cn/gitlab/autocomplete/users.json?search=&active=true&project_id=72&current_user=true
 
+  //https://dev365.keytop.cn/gitlab/groups/FRONT/-/children.json
+  // 获取项目id
+
   const jumpMerge = async () => {
+    const projectId = (await ajaxPromise({
+      url: `https://dev365.keytop.cn/gitlab/groups/FRONT/-/children.json`
+    })).find(item => {
+      return item.name === sessionStorage.getItem('ProjectName');
+    });
+    sessionStorage.setItem('projectId', projectId);
+
     const sourceArr = (await ajaxPromise({
       url: `https://dev365.keytop.cn/gitlab/FRONT/${sessionStorage.getItem(
         'ProjectName'
@@ -111,7 +121,7 @@ $(function() {
     // 项目id还没改
     window.location.href = `https://dev365.keytop.cn/gitlab/FRONT/${sessionStorage.getItem(
       'ProjectName'
-    )}/merge_requests/new?utf8=%E2%9C%93&merge_request%5Bsource_project_id%5D=72&merge_request%5Bsource_branch%5D=${sourceId}&merge_request%5Btarget_project_id%5D=72&merge_request%5Btarget_branch%5D=${targetId}`;
+    )}/merge_requests/new?utf8=%E2%9C%93&merge_request%5Bsource_project_id%5D=${projectId}&merge_request%5Bsource_branch%5D=${sourceId}&merge_request%5Btarget_project_id%5D=${projectId}&merge_request%5Btarget_branch%5D=${targetId}`;
   };
 
   // jump to merge page
