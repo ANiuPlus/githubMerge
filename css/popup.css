@@ -1,0 +1,35 @@
+.wraper {
+  padding: 20px;
+  width: 140px;
+  box-sizing: border-box;
+}
+.wraper__label {
+  font-size: 16px;
+  line-height: 25px;
+}
+.radio-button__inset + .radio-button__color {
+}
+.radio-button__inset + .radio-button__color {
+  display: block;
+  width: 45px;
+  height: 25px;
+  position: relative;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background: #f6f6f6;
+  border-radius: 20px;
+  border: 1px solid #e2e2e2;
+}
+.radio-button__inset:checked + .radio-button__color {
+  border: 1px solid #fdd535;
+}
+.radio-button__inset + .radio-button__color .radio-button__after {
+  background: #fff;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  top: 0;
+  left: 1px;
+}
