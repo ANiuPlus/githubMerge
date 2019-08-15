@@ -4,7 +4,7 @@
  * @Author: Aniu
  * @Date: 2019-08-12 15:27:48
  * @LastEditors: Aniu
- * @LastEditTime: 2019-08-14 09:49:15
+ * @LastEditTime: 2019-08-15 08:48:34
  */
 
 const sessionArr = ['isNew', 'isOpen', 'isMerge', 'ProjectName', 'href'];
@@ -22,13 +22,22 @@ const goFront = () => {
 };
 
 $(function() {
-  // chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  //   // console.log(sender.tab ?"from a content script:" + sender.tab.url :"from the extension");
-  //   if (request.cmd == 'test') alert(request.value);
-  //   sendResponse('我收到了你的消息！');
-  // });
-
-  return;
+  console.log('content');
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    console.log(
+      sender.tab
+        ? 'from a content script:' + sender.tab.url
+        : 'from the extension'
+    );
+    // if (request.cmd == 'test') alert(request.value);
+    if (request.value) {
+      localStorage.removeItem('success');
+    } else {
+      localStorage.setItem('success', 1);
+    }
+    sendResponse('我收到了你的消息！');
+  });
+  // return;
   if (window.location.href === 'https://dev365.keytop.cn/gitlab/FRONT') {
     clearSession();
     return;
