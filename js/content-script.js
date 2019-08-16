@@ -4,16 +4,16 @@
  * @Author: Aniu
  * @Date: 2019-08-12 15:27:48
  * @LastEditors: Aniu
- * @LastEditTime: 2019-08-15 08:48:34
+ * @LastEditTime: 2019-08-16 16:12:56
  */
 
 const sessionArr = ['isNew', 'isOpen', 'isMerge', 'ProjectName', 'href'];
 
-const clearSession = () => {
+(() => {
   sessionArr.forEach(item => {
     sessionStorage.removeItem(item);
   });
-};
+})();
 
 const goFront = () => {
   setTimeout(() => {
@@ -39,7 +39,7 @@ $(function() {
   });
   // return;
   if (window.location.href === 'https://dev365.keytop.cn/gitlab/FRONT') {
-    clearSession();
+    // clearSession();
     return;
   }
   if (localStorage.getItem('success')) return;

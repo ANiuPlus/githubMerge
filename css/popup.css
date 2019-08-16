@@ -7,7 +7,7 @@
   font-size: 16px;
   line-height: 25px;
 }
-.radio-button__inset + .radio-button__color {
+.radio-button__color {
   display: block;
   width: 45px;
   height: 25px;
@@ -20,11 +20,11 @@
   border-radius: 20px;
   border: 1px solid #e2e2e2;
 }
-.radio-button__inset:checked + .radio-button__color {
+.radio-button.active .radio-button__color {
   background: #fdd535;
   border: 1px solid #fdd535;
 }
-.radio-button__inset + .radio-button__color .radio-button__after {
+.radio-button__color .radio-button__after {
   position: absolute;
   top: 0;
   left: 1px;
@@ -33,7 +33,7 @@
   width: 22px;
   height: 22px;
 }
-.radio-button__inset:checked + .radio-button__color .radio-button__after {
+.radio-button.active .radio-button__color .radio-button__after {
   right: 0;
   left: auto;
 }
