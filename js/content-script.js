@@ -4,16 +4,16 @@
  * @Author: Aniu
  * @Date: 2019-08-12 15:27:48
  * @LastEditors: Aniu
- * @LastEditTime: 2019-08-16 16:12:56
+ * @LastEditTime: 2019-08-16 17:02:10
  */
 
 const sessionArr = ['isNew', 'isOpen', 'isMerge', 'ProjectName', 'href'];
 
-(() => {
+const clearSession = () => {
   sessionArr.forEach(item => {
     sessionStorage.removeItem(item);
   });
-})();
+};
 
 const goFront = () => {
   setTimeout(() => {
@@ -39,7 +39,7 @@ $(function() {
   });
   // return;
   if (window.location.href === 'https://dev365.keytop.cn/gitlab/FRONT') {
-    // clearSession();
+    clearSession();
     return;
   }
   if (localStorage.getItem('success')) return;
@@ -106,11 +106,12 @@ $(function() {
   // 获取项目id
 
   const jumpMerge = async () => {
-    const projectId = (await ajaxPromise({
+    const project = (await ajaxPromise({
       url: `https://dev365.keytop.cn/gitlab/groups/FRONT/-/children.json`
     })).find(item => {
       return item.name === sessionStorage.getItem('ProjectName');
     });
+    const projectId = project.id;
     sessionStorage.setItem('projectId', projectId);
 
     const sourceArr = (await ajaxPromise({
