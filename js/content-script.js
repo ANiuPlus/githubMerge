@@ -4,7 +4,7 @@
  * @Author: Aniu
  * @Date: 2019-08-12 15:27:48
  * @LastEditors: Aniu
- * @LastEditTime: 2019-08-15 08:48:34
+ * @LastEditTime: 2019-08-19 19:16:16
  */
 
 const sessionArr = ['isNew', 'isOpen', 'isMerge', 'ProjectName', 'href'];
@@ -124,13 +124,22 @@ $(function() {
     var next1 = sourceArr.findIndex(item => {
       return /^[A-Za-z]+$/.test(item);
     });
-
-    var next2 = sourceArr.findIndex(item => {
-      return /^[0-9]+$/.test(item);
+    // find all branch which one has two number
+    var dotArr = sourceArr.filter(item => {
+      // 不含字符只包含点
+      if (/\./.test(item) && !/[A-Za-z]/.test(item)) {
+        return item;
+      }
     });
-
+    debugger;
+    var nextArr = dotArr.map(item => {
+      return item.split('.')[2];
+    });
+    // 取最大值
+    var max = Math.max.apply(null, nextArr);
+    var next2 = nextArr.indexOf(max + '');
     var sourceId = sourceArr[next1 - 1]; //取纯数字分支最后一个
-    var targetId = sourceArr[next2 - 1]; //取带点分支最后一个
+    var targetId = dotArr[next2]; //取带点分支最后一个
 
     sessionStorage.setItem('isOpen', 1);
     // 项目id还没改
