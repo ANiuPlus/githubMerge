@@ -4,7 +4,7 @@
  * @Author: Aniu
  * @Date: 2019-08-14 18:24:23
  * @LastEditors: Aniu
- * @LastEditTime: 2019-08-16 16:12:43
+ * @LastEditTime: 2019-08-20 08:17:56
  */
 function sendMessageToContentScript(message, callback) {
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
@@ -24,13 +24,14 @@ $(() => {
       });
       that.removeClass('active');
       console.log(that.hasClass('active'));
-      // localStorage.removeItem('success');
+      localStorage.removeItem('success');
     } else {
       sendMessageToContentScript({ cmd: 'test', value: 1 }, function(response) {
         console.log('来自content的回复：' + response);
       });
       that.addClass('active');
       console.log(that.hasClass('active'));
+      localStorage.setItem('success', 1);
     }
   });
 });
